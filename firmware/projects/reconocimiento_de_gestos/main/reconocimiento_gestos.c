@@ -38,7 +38,7 @@
 #include "timer_mcu.h"
 
 /* TODO: Incluir header con los coeficientes del filtro a utilizar */
-#include "cheby6.h"
+#include "buter2.h"
 
 /* TODO: Incluir header con el algoritmo de clasificación */
  #include "classifier.h"

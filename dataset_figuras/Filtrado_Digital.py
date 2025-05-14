@@ -140,15 +140,15 @@ ax2[1].set_xlim([0, FS_resample/2])
 senial
 
 # Se cargan los archivo generado mediante pyFDA
-filtro_fir = np.load('cheby6.npz', allow_pickle=True)
-filtro_iir = np.load('cheby6.npz', allow_pickle=True) 
+filtro_fir = np.load('buter2.npz', allow_pickle=True)
+filtro_iir = np.load('buter2.npz', allow_pickle=True) 
 
 # Se muestran parámetros de diseño
 print("Filtro FIR:")
-filter_parameters.filter_parameters('cheby6.npz')
+filter_parameters.filter_parameters('buter2.npz')
 print("\r\n")
 print("Filtro IIR:")
-filter_parameters.filter_parameters('cheby6.npz')
+filter_parameters.filter_parameters('buter2.npz')
 print("\r\n")
 
 # Se extraen los coeficientes de numerador y denominador
