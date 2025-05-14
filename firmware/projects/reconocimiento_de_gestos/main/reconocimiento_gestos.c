@@ -38,21 +38,22 @@
 #include "timer_mcu.h"
 
 /* TODO: Incluir header con los coeficientes del filtro a utilizar */
-// #include "butter.h"
+#include "cheby6.h"
+
 /* TODO: Incluir header con el algoritmo de clasificación */
-// #include "classifier.h"
+ #include "classifier.h"
 
 /*==================[macros and definitions]=================================*/
 /* TODO: Luego de obtenido los coeficientes del filtro descomentar la siguiente 
 linea para agregar filtrado digital a las señales */
-// #define FILTER                              /**< @brief Filtrado digital activado */
+ #define FILTER                              /**< @brief Filtrado digital activado */
 
 /* TODO: Luego de obtenido el modelo de inferencia descomentar la siguiente linea
  para activar la clasificación de señales */
 // #define INFERRINGML                         /**< @brief Inferencia mediante ML activada */
 
 /* TODO: Modificar tiempo y frecuencia de muestreo según diseño */
-#define SAMPLE_FREC		500                 /**< @brief Frecuencia de muestreo en Hz*/
+#define SAMPLE_FREC		60                 /**< @brief Frecuencia de muestreo en Hz*/
 #define TIME_SAMPLE		3.0                 /**< @brief Duración del movimiento en segundos */
 
 #ifdef INFERRINGML

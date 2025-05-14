@@ -18,10 +18,10 @@ import matplotlib.pyplot as plt
 
 #%% Lectura del dataset
 
-FS = 500 # Frecuencia de muestre: 500Hz
+FS = 60 # Frecuencia de muestre: 500Hz
 T = 3    # Tiempo total de cada registro: 2 segundos
 
-folder = 'dataset_clases' # Carpeta donde se almacenan los .csv
+folder = 'dataset_filtrado' # Carpeta donde se almacenan los .csv
 
 x, y, z, classmap = process_data.process_data(FS, T, folder)
 

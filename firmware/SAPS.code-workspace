@@ -74,7 +74,8 @@
             "gpio_fast_out_mcu.h": "c",
             "cmath": "c",
             "complex": "c",
-            "butter.h": "c"
+            "butter.h": "c",
+            "filtro.h": "c"
         },
     },
     "tasks": {

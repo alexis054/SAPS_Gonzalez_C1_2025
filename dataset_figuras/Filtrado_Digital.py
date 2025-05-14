@@ -140,15 +140,15 @@ ax2[1].set_xlim([0, FS_resample/2])
 senial
 
 # Se cargan los archivo generado mediante pyFDA
-filtro_fir = np.load('IIR2.npz', allow_pickle=True)
-filtro_iir = np.load('filtro_fir.npz', allow_pickle=True) 
+filtro_fir = np.load('cheby6.npz', allow_pickle=True)
+filtro_iir = np.load('cheby6.npz', allow_pickle=True) 
 
 # Se muestran parámetros de diseño
 print("Filtro FIR:")
-filter_parameters.filter_parameters('IIR2.npz')
+filter_parameters.filter_parameters('cheby6.npz')
 print("\r\n")
 print("Filtro IIR:")
-filter_parameters.filter_parameters('filtro_fir.npz')
+filter_parameters.filter_parameters('cheby6.npz')
 print("\r\n")
 
 # Se extraen los coeficientes de numerador y denominador
@@ -183,7 +183,7 @@ print("\r\n")
 
 # Se calcula la respuesta en frecuencia de los filtros
 f_fir, h_fir = signal.freqz(Num_fir, Den_fir, worN=f, fs=FS_resample)
-f_iir, h_iir = signal.freqz(Num_iir, Den_iir, worN=f, fs=FS_resample)
+f_iir, h_iir = signal.freqz(Num_iir, Den_iir, worN=100000, fs=FS_resample)
 
 # Se grafican las respuestas de los filtros
 ax2[0].plot(f_fir, abs(h_fir), label='Filtro FIR', color='orange')
@@ -239,8 +239,8 @@ ax3[1].legend(loc="upper right", fontsize=12)
 
 #%% Filtrado de la Señal 
 
-ceros_agregar=  74
-senial=np.pad(senial,(0,ceros_agregar),mode='constant')
+#ceros_agregar=  74
+#senial=np.pad(senial,(0,ceros_agregar),mode='constant')
 
 # Se aplica el filtrado sobre la señal
 senial_fir = signal.lfilter(Num_fir, Den_fir, senial)
@@ -248,8 +248,8 @@ senial_iir = signal.lfilter(Num_iir, Den_iir, senial)
 
 # Eliminar los ceros agregados al final
 
-senial_fir = senial_fir[ceros_agregar:]  # eliminar el delay al comienzo
-senial_iir = senial_iir[ceros_agregar:]  # eliminar el delay al comienzo
+#senial_fir = senial_fir[ceros_agregar:]  # eliminar el delay al comienzo
+#senial_iir = senial_iir[ceros_agregar:]  # eliminar el delay al comienzo
 
 
 
@@ -286,6 +286,8 @@ t_end_iir = time()
 print("El algoritmo de filtrado FIR toma {:.3f}s".format(t_end_fir - t_start_fir))
 print("El algoritmo de filtrado IIR toma {:.3f}s".format(t_end_iir - t_start_iir))
 
+
+process_code.iir_sos_header('cheby6.h', signal.tf2sos(Num_iir, Den_iir))
 
 
 
