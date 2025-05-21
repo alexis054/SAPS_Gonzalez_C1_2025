@@ -75,7 +75,8 @@
             "cmath": "c",
             "complex": "c",
             "butter.h": "c",
-            "filtro.h": "c"
+            "filtro.h": "c",
+            "*.isph": "c"
         },
     },
     "tasks": {

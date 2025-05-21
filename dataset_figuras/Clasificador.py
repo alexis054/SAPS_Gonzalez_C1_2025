@@ -46,11 +46,11 @@ features_list = [
     'x_mean', 'y_mean', 'z_mean', 
     'x_max', 'y_max', 'z_max', 
     # 'x_min', 'y_min', 'z_min',
-    #'x_max_pos', 'y_max_pos', 'z_max_pos', 
+    'x_max_pos', 'y_max_pos', 'z_max_pos', 
     # 'x_min_pos', 'y_min_pos', 'z_min_pos', 
     'x_rms', 'y_rms', 'z_rms', 
     # 'x_0_cross', 'y_0_cross', 'z_0_cross',
-    'x_en_above_0', 'y_en_above_0', 'z_en_above_0',
+    #'x_en_above_0', 'y_en_above_0', 'z_en_above_0',
     #'x_en_below_0', 'y_en_below_0', 'z_en_below_0',
     'gesture_name']
 
@@ -73,9 +73,9 @@ for capture in range(int(len(x))):                  # Se recorre cada renglón d
     #features[capture][fd.get('y_min')] = np.min(y[capture, 0:N])  
     #features[capture][fd.get('z_min')] = np.min(z[capture, 0:N])
     # TODO: Cálculo de la posición del máximo
-    #features[capture][fd.get('x_max_pos')] = np.argmax(x[capture, 0:N])  
-    #features[capture][fd.get('y_max_pos')] = np.argmax(y[capture, 0:N])
-    #features[capture][fd.get('z_max_pos')] = np.argmax(z[capture, 0:N])     
+    features[capture][fd.get('x_max_pos')] = np.argmax(x[capture, 0:N])  
+    features[capture][fd.get('y_max_pos')] = np.argmax(y[capture, 0:N])
+    features[capture][fd.get('z_max_pos')] = np.argmax(z[capture, 0:N])     
     # TODO: Cálculo de la posición del mínimo
     #features[capture][fd.get('x_min_pos')] = np.argmin(x[capture, 0:N])
     #features[capture][fd.get('y_min_pos')] = np.argmin(y[capture, 0:N])
@@ -89,9 +89,9 @@ for capture in range(int(len(x))):                  # Se recorre cada renglón d
     #features[capture][fd.get('y_0_cross')] = ((y[capture, 0:N-1] * y[capture, 1:N]) < 0).sum()
     #features[capture][fd.get('z_0_cross')] = ((z[capture, 0:N-1] * z[capture, 1:N]) < 0).sum() 
     # TODO: Cálculo de la energía de la señal por encima de cero
-    features[capture][fd.get('x_en_above_0')] = sum(x[capture, 0:N][x[capture, 0:N]>0]**2) 
-    features[capture][fd.get('y_en_above_0')] = sum(y[capture, 0:N][y[capture, 0:N]>0]**2)
-    features[capture][fd.get('z_en_above_0')] = sum(z[capture, 0:N][z[capture, 0:N]>0]**2)
+    #features[capture][fd.get('x_en_above_0')] = sum(x[capture, 0:N][x[capture, 0:N]>0]**2) 
+    #features[capture][fd.get('y_en_above_0')] = sum(y[capture, 0:N][y[capture, 0:N]>0]**2)
+    #features[capture][fd.get('z_en_above_0')] = sum(z[capture, 0:N][z[capture, 0:N]>0]**2)
     # TODO: Cálculo de la energía de la señal por debajo de cero
     #features[capture][fd.get('x_en_below_0')] = sum(x[capture, 0:N][x[capture, 0:N]<0]**2)
     #features[capture][fd.get('y_en_below_0')] = sum(y[capture, 0:N][y[capture, 0:N]<0]**2)
@@ -111,7 +111,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 #Creamos un modelo de tipo Random Forrest y le pasamos la partición del dataset y salida
 # de entrenamiento
-clf = RandomForestClassifier(n_estimators=10, max_depth=10, max_features= 10, random_state=8, bootstrap=False).fit(X_train, y_train)
+clf = RandomForestClassifier(n_estimators=10, max_depth=10, max_features= 10, random_state=10, bootstrap=False).fit(X_train, y_train)
 
 #Utilizo el modelo entrenado para obtener la predicción de las salidas de testo
 y_pred_test = clf.predict(X_test)

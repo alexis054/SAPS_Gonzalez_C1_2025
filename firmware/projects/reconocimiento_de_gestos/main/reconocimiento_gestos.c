@@ -46,11 +46,11 @@
 /*==================[macros and definitions]=================================*/
 /* TODO: Luego de obtenido los coeficientes del filtro descomentar la siguiente 
 linea para agregar filtrado digital a las señales */
- #define FILTER                              /**< @brief Filtrado digital activado */
+#define FILTER                              /**< @brief Filtrado digital activado */
 
 /* TODO: Luego de obtenido el modelo de inferencia descomentar la siguiente linea
  para activar la clasificación de señales */
-// #define INFERRINGML                         /**< @brief Inferencia mediante ML activada */
+#define INFERRINGML                         /**< @brief Inferencia mediante ML activada */
 
 /* TODO: Modificar tiempo y frecuencia de muestreo según diseño */
 #define SAMPLE_FREC		60                 /**< @brief Frecuencia de muestreo en Hz*/
@@ -58,7 +58,7 @@ linea para agregar filtrado digital a las señales */
 
 #ifdef INFERRINGML
 /* TODO: Modificar cantidad de características a utilizar. En este ejemplo son 3 (mean_x, mean_y y mean_z) */
-#define FEATURES_QTY    3                   /**< @brief Cantidad de características */
+#define FEATURES_QTY    4                   /**< @brief Cantidad de características */
 #endif
 
 #define NUM_AXES		3                   /**< @brief Número de ejes */
@@ -109,7 +109,7 @@ float features[FEATURES_QTY];       /**< @brief Vector de características. */
 /* TODO: Declarar variables auxiliares para la extracción de características */
 float x_mean, y_mean, z_mean;       /**< @brief Medias de las señales. */
 float x_max, y_max, z_max;          /**< @brief Maximos de las señales. */
-float x_min, y_min, z_min;          /**< @brief Minimos de las señales. */
+float x_max_pos, y_max_pos, z_max_pos;          /**< @brief Minimos de las señales. */
 float x_rms, y_rms, z_rms;          /**< @brief RMS de las señales. */
 #endif
 
@@ -243,7 +243,7 @@ void ProcessTask(void *pvParameter){
                 }
                 break;
             case END_REC:
-                LedOff(LED_2);
+                LedOff(LED_2);              
                 #ifdef FILTER
                 printf("%1.2f,", x_G_filt);
                 printf("%1.2f,", y_G_filt);
@@ -323,14 +323,59 @@ void ProcessTask(void *pvParameter){
                     x_mean = 0;
                     y_mean = 0;
                     z_mean = 0;
-                    for(uint16_t i=0; i<NUM_SAMPLES; i++){
-                        x_mean += x_chunk[i];
-                        y_mean += y_chunk[i];
-                        z_mean += z_chunk[i];
+                    float sum_x = 0, sum_y = 0, sum_z = 0;
+                    float sum_sq_x = 0, sum_sq_y = 0, sum_sq_z = 0;
+                    x_max = x_chunk[0], y_max = y_chunk[0], z_max = z_chunk[0];
+                    x_max_pos = 0, y_max_pos = 0, z_max_pos = 0;
+
+                    for (int i = 0; i < NUM_SAMPLES; i++) {
+                        // Acumuladores para la media
+                        sum_x += x_chunk[i];
+                        sum_y += y_chunk[i];
+                        sum_z += z_chunk[i];
+
+                        // Acumuladores para el RMS
+                        sum_sq_x += x_chunk[i] * x_chunk[i];
+                        sum_sq_y += y_chunk[i] * y_chunk[i];
+                        sum_sq_z += z_chunk[i] * z_chunk[i];
+
+                        // Máximos
+                        if (x_chunk[i] > x_max) {
+                            x_max = x_chunk[i];
+                            x_max_pos = i;
+                        }
+                        if (y_chunk[i] > y_max) {
+                        y_max = y_chunk[i];
+                        y_max_pos = i;
+                        } 
+                        if (z_chunk[i] > z_max) {
+                            z_max = z_chunk[i];
+                            z_max_pos = i;
+                        }
                     }
-                    features[0] = x_mean / NUM_SAMPLES;
-                    features[1] = y_mean / NUM_SAMPLES;
-                    features[2] = z_mean / NUM_SAMPLES;
+
+                    // Cálculo final
+                    float x_mean = sum_x / NUM_SAMPLES;
+                    float y_mean = sum_y / NUM_SAMPLES;
+                    float z_mean = sum_z / NUM_SAMPLES;
+                    float x_rms = sqrtf(sum_sq_x / NUM_SAMPLES);
+                    float y_rms = sqrtf(sum_sq_y / NUM_SAMPLES);
+                    float z_rms = sqrtf(sum_sq_z / NUM_SAMPLES);
+
+                    // Guardar en el vector de características
+                    features[0] = x_mean;
+                    features[1] = y_mean;
+                    features[2] = z_mean;
+                    features[3] = x_max;
+                    features[4] = y_max;
+                    features[5] = z_max;
+                    features[6] = x_max_pos;
+                    features[7] = y_max_pos;
+                    features[8] = z_max_pos;
+                    features[9] = x_rms;
+                    features[10] = y_rms;
+                    features[11] = z_rms;
+                    
                     /* Fin de cálculo de features */
                     printf("%s\n", predictLabel(features));
                     frame = 0;

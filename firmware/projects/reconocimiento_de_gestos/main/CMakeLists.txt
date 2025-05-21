@@ -1,2 +1,2 @@
-idf_component_register(SRCS "reconocimiento_gestos.c" "classifier.c" 
+idf_component_register(SRCS "classifier.c" "reconocimiento_gestos.c" 
                     INCLUDE_DIRS "")
