@@ -20,8 +20,8 @@ def process_classifier(code, type_clf):
     --------
     Archivo procesado en ANSI C    
     """
-    with open("Classifier.c", "w") as file:
-        file.write('#include "Classifier.h"\n\n')
+    with open("Orquesta.c", "w") as file:
+        file.write('#include "Orquesta.h"\n\n')
     
     x = code.split("protected:")
     index_public = x[0].find("public:")
@@ -59,7 +59,7 @@ def process_classifier(code, type_clf):
     pretty = re.sub(r'\}\n\n(\s*?)\}', lambda m: '}\n%s}' % m.groups(), pretty)
     # remove "," before "}"
     pretty = re.sub(r',\s*\}', '}', pretty) 
-    with open("Classifier.c", "a") as file:
+    with open("Orquesta.c", "a") as file:
         file.write(pretty)
     #pprint(pretty)
     code = x[1][index_protected+10:index_protected_end]
@@ -92,9 +92,9 @@ def process_classifier(code, type_clf):
     # remove "," before "}"
     pretty = re.sub(r',\s*\}', '}', pretty)       
     #print(pretty)    
-    with open("Classifier.c", "a") as file:
+    with open("Orquesta.c", "a") as file:
         file.write(pretty)
-    with open("Classifier.h", "w") as file:
+    with open("Orquesta.h", "w") as file:
         file.write('#ifndef _INC_MODEL_H_\n')    
         file.write('#define _INC_MODEL_H_\n\n')
         file.write('#include <stdarg.h>\n')

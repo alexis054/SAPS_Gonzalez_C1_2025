@@ -30,7 +30,7 @@ from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score, confusion_ma
 FS = 60 # Frecuencia de muestre: 500Hz
 T = 3    # Tiempo total de cada registro: 2 segundos
 
-folder = 'dataset_filtrado - Copy' # Carpeta donde se almacenan los .csv
+folder = 'dataset_filtrado' # Carpeta donde se almacenan los .csv
 
 
 #Procesamos los archivos para obtener el dataset junto con el diccionario de clases
@@ -107,7 +107,7 @@ for capture in range(int(len(x))):                  # Se recorre cada renglón d
 X, y = features[:, :-1], features[:, -1]
 
 #Separamos el dataset y el vector de salida en partes iguales para el entrenamiento y testeo
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=0)
 
 #Creamos un modelo de tipo Random Forrest y le pasamos la partición del dataset y salida
 # de entrenamiento
@@ -140,6 +140,6 @@ print(recall_score(y_test, y_pred_test, average=None))
 process_code.process_classifier(port(clf, classname="Classifier", classmap=classmap),'RandomForest')
 
 #Graficamos algunos de los arboles
-for i in range(10):    
-    plt.figure(figsize=(25,15))
-    tree.plot_tree(clf.estimators_[i], filled=True, feature_names = features_list, class_names = classmap)
+#for i in range(10):    
+ #   plt.figure(figsize=(25,15))
+  #  tree.plot_tree(clf.estimators_[i], filled=True, feature_names = features_list, class_names = classmap)

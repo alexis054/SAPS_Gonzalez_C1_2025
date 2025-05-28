@@ -35,16 +35,16 @@ for gesture_name in classmap:
             
             freq = fft.fftfreq(N, ts)[:N_half]  #Solo frecuencias positivas
             # FFT de la señal en X
-            x_f = (fft.fft(x[capture, 0:N]) * SENS) + OFF 
+            x_f=fft.fft((x[capture, 0:N]) * SENS + OFF)   
             
             # FFT de la señal en Y
-            y_f = (fft.fft(y[capture, 0:N]) * SENS) + OFF 
+            y_f =fft.fft((y[capture, 0:N]) * SENS + OFF)   
             
             # FFT de la señal en Z
             # Recorro el renglon correspondiente al valor de capture, desde 0 hasta N-1. Esto me da un subarreglo
             # que se corresponde a la fila de capture y a las primeras N columnas de la matriz.
             # Además ya hago la conversión de [G] a [V]
-            z_f = (fft.fft(z[capture, 0:N]) * SENS) + OFF 
+            z_f = fft.fft((z[capture, 0:N]) * SENS + OFF)   
             
             # Como la transformada de fourier genera un espectro simetrico, se considera solamente la mitad y graficamos
             #desde 0 hasta nyquist, tambien como consideramos la mitad para mantener la relacion de parseval debemos multiplicar
@@ -56,9 +56,9 @@ for gesture_name in classmap:
 
 # Graficacion
             
-            axes[gesture_name][0].plot(freq, x_f_mod, label="Medicion {}".format(medicion)) #graficacion eje x
-            axes[gesture_name][1].plot(freq, y_f_mod, label="Medicion {}".format(medicion)) #graficacion eje y
-            axes[gesture_name][2].plot(freq, z_f_mod, label="Medicion {}".format(medicion))#graficacion eje z 
+            axes[gesture_name][0].plot(freq, x_f_mod ) #graficacion eje x
+            axes[gesture_name][1].plot(freq, y_f_mod) #graficacion eje y
+            axes[gesture_name][2].plot(freq, z_f_mod)#graficacion eje z 
 
            
             medicion = medicion+1 #paso a la siguiente medicion
@@ -95,15 +95,3 @@ for gesture_name in classmap:
 #Se muestra el gráfico
 plt.tight_layout()
 plt.show()
-
-#%% Filtros
-
-#a partir de ver las graficas puedo determinar que el ancho de banda de interes
-
-Ab=30
-
-#defino la fm de la banda de interes como 4 veces la AB
-
-fm_interes = 4 * Ab
-
-#defino la frecuencia de corte como la fm de la banda de interes

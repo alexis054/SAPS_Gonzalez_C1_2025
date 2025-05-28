@@ -41,7 +41,7 @@
 #include "cheby6.h"
 
 /* TODO: Incluir header con el algoritmo de clasificación */
- #include "classifier.h"
+ #include "Orquesta.h"
 
 /*==================[macros and definitions]=================================*/
 /* TODO: Luego de obtenido los coeficientes del filtro descomentar la siguiente 

@@ -87,7 +87,7 @@ for gesture in range(n_gestures):
     # Eje Y
     for fft_y in fft_data[gesture]['y']:
         axes[gesture, 1].plot(freq, fft_y, alpha=0.5, linewidth=0.8)
-    axes[gesture, 1].set_title(f"{classmap[gesture]} - Eje Y", fontsize=10)
+z    axes[gesture, 1].set_title(f"{classmap[gesture]} - Eje Y", fontsize=10)
     axes[gesture, 1].set_xlim(0, 90)
     axes[gesture, 1].grid(True, alpha=0.3)
 
@@ -276,7 +276,7 @@ ax3.plot(f_impl,  mag_impl, label='Implementado')
 
 plt.show()
 
-<<<<<<< HEAD
+
 #%% filtro digital
 
 # Parámetros para el remuestreo de las señales
@@ -435,9 +435,8 @@ print("El algoritmo de filtrado IIR toma {:.3f}s".format(t_end_iir - t_start_iir
 
 
 
-=======
 #%% Filtrado Digital
 
 # Graficacion de la señal origianl
->>>>>>> 8a7413109e71450bdb7f1c2e39660a39f2f739b2
+
 
