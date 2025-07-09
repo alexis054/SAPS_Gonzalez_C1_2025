@@ -87,7 +87,7 @@ for gesture in range(n_gestures):
     # Eje Y
     for fft_y in fft_data[gesture]['y']:
         axes[gesture, 1].plot(freq, fft_y, alpha=0.5, linewidth=0.8)
-z    axes[gesture, 1].set_title(f"{classmap[gesture]} - Eje Y", fontsize=10)
+    axes[gesture, 1].set_title(f"{classmap[gesture]} - Eje Y", fontsize=10)
     axes[gesture, 1].set_xlim(0, 90)
     axes[gesture, 1].grid(True, alpha=0.3)
 

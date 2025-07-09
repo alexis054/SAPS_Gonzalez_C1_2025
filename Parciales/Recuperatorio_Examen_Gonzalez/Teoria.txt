@@ -1,0 +1,16 @@
+1)La gráfica de la figura muestra la magnitud de la respuesta en frecuencia de dos funciones de chebyshev del mismo orden con diferente ancho de banda de ripple.
+
+Falso la figura corresponde a dos Chebyshev con diferente orden, pero el mismo ancho de banda de ripple, esto o podemos
+ver justamente por que el ripple que va entre 0.8 y 1 en la banda de paso es el mismo 
+
+2)Si el par de polos de una sección de orden 2 se acerca al eje imaginario, el Q de la misma aumenta.
+
+Veerdadero. Si el par de polos se acerca al eje imaginario, el cos de tita disminuye, osea el factor de amortiguamento disminuye
+esto hace que el factor Q aumente porque se define matematicamente como 1/2*xi siendo xi el factor de amortiguamiento,
+pareciendose mas el circuito a un tanque LC
+
+3)Si se desea adquirir una señal cuyas componentes de interés se encuentran hasta 100 Hz. ¿Es posible realizar la adquisición libre de aliasing utilizando un filtro pasabajos de Butterworth de 2do Orden con Frecuencia de corte 100 Hz, implementado con una celda de Sallen-Key, antes del conversor de 8 bits y emplear una frecuencia de muestreo de 200 Hz?
+
+No es posible realizar la adquisicion sin aliasing porque el filtro que se exige al muestrear a dos veces la frecuencia 
+de ancho de banda de la señal es un fitro ideal, uno sin banda de transición. En la realidad para encontrar una frecuencia de muestreo que nos premita realizar el filtrado hay que multiplicar el ancho de banda de nuestra señal e interés por un factor de seguridad, cuanto mayor sea este factor menor sera la exigencia para el filtro analogico pero mayor sera la exigencia ala hora 
+de elegir nuestro conversor adc 

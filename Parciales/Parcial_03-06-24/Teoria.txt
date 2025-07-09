@@ -1,0 +1,22 @@
+1) El circuito de la figura corresponde a un filtro de Sallen-Key. En el mismo se puede variar la
+ ubicación del par de polos complejos conjugados modificando la relación entre R4 y R3
+
+Esta afirmacion es verdadera, es un filtro sallen-key, este nace a partir de 2 filtros pasabajos rc puestos en serie
+pero la ubicacion de estos polos se ubican sobre el eje real, lo que me permite hacer la realimentacion es despegar 
+los polos del eje real
+
+2) La implementación con componentes pasivos de filtros de Butterworth y Chebyshev I, para
+ un mismo orden, difiere en el número total de componentes y sus valores (resistencias,
+ bobinas y capacitores); siendo los primeros los que utilizan menor cantidad de componentes
+
+Esto es falso, la diferencia que hay entre los cheby y los butterworth es el valor de los componentes pero no la cantidad
+de estos mismos ni su distribucion.
+
+3)La transformada invariante al impulso permite obtener una versión digital de un sistema
+ analógico, H(z) a partir de H(s), y debido al aliasing solo puede emplearse para la
+ implementación de filtros pasa bandas o pasa altos
+
+Falso. La Transformada invariante al impulso adapta la señal analógica en una digital a partir de 
+igualar la respuesta al impulso de la señal digital a la de la analógica. Además, un filtro antialas no puede 
+ser un pasa altos, ya que de esta forma no cumpliría su función de eliminar las frecuencias mayores a la 
+mitad de la frecuencia de muestreo por lo tanto no eliminaría el Aliasing

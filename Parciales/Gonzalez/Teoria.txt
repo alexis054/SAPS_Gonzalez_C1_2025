@@ -1,0 +1,3 @@
+1) Falso,el circuito si corresponde a un sallen key pero la relacion entre R3 y R4 varia la ganancia, 
+no modifica la posicion de los polos
+
